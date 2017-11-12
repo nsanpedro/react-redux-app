@@ -1,7 +1,7 @@
-/**
- * Created by logic on 10/12/16.
- */
+
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import * as courseActions from '../../actions/courseActions';
 
 class CoursePage extends React.Component {
   constructor(props, context){
@@ -22,7 +22,8 @@ class CoursePage extends React.Component {
   }
 
   onClickSave() {
-    alert(`Saving ` + this.state.course.title);
+    //alert(`Saving ` + this.state.course.title);
+    this.props.dispatch(courseActions.createCourse(this.state.course));
   }
 
   render() {
@@ -44,4 +45,15 @@ class CoursePage extends React.Component {
   }
 }
 
-export default CoursePage;
+function mapStateToProps(state, ownProps) {
+  return {
+    courses: state.courses 
+  };
+}
+
+export default connect(mapStateToProps)(CoursePage);
+
+
+
+
+
